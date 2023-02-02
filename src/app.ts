@@ -1,9 +1,11 @@
 import "reflect-metadata";
 import express from "express";
-// import useRoutes from "./routes/user.routes";
+import userRoutes from "./routes/user/user.routes";
 
 const app = express();
 app.use(express.json());
+
+app.use("/user", userRoutes);
 
 app.listen(3331, () => {
   console.log("Server running");

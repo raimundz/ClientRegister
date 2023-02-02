@@ -11,13 +11,16 @@ export class User {
 
   @Column()
   email: string;
+  @Column()
+  password: string;
 
   @Column()
-  tel: number;
+  tel: string;
 
-  @OneToMany(() => Contact, (contacts) => contacts.user)
-  @JoinColumn({ name: "contacts" })
-  
+  @OneToMany(() => Contact, (contacts) => contacts.user, { eager: true })
+  // @JoinColumn({ name: "contacts" })
+  contacts: Contact[];
+
   @Column()
   createdAt: string;
 
