@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn, OneToMany, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Contact } from "../contacts/contacts.entity";
+import { Contact } from "./contacts.entity";
+
 @Entity()
 export class User {
   @PrimaryColumn("uuid")
@@ -18,7 +19,6 @@ export class User {
   tel: string;
 
   @OneToMany(() => Contact, (contacts) => contacts.user, { eager: true })
-  // @JoinColumn({ name: "contacts" })
   contacts: Contact[];
 
   @Column()

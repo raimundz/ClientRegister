@@ -5,13 +5,16 @@ declare global {
     interface Request {
       user: {
         id: string;
-        isAdm: boolean;
       };
       updateUser: {
         email?: BaseSchema<Maybe<string | undefined>>;
         name?: BaseSchema<Maybe<string | undefined>>;
         password?: BaseSchema<Maybe<string | undefined>>;
+        tel?: BaseSchema<Maybe<string | undefined>>;
       };
     }
+    // interface Request {
+    //   user?: Record<string,any>
+    // }
   }
 }

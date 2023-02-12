@@ -8,6 +8,6 @@ const router = Router();
 
 router.post("", createUserController);
 router.get("", listUsersController);
-router.patch("", updateUserController);
-router.delete("", userDeleteController);
+router.patch("/:id", updateUserController);
+router.delete("/:id", userDeleteController);
 export default router;

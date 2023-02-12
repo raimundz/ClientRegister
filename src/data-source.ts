@@ -1,15 +1,18 @@
-import { DataSource } from "typeorm"
-import "dotenv/config"
+import { DataSource } from "typeorm";
+import "dotenv/config";
+import { User } from "./entities/user.entity";
+import { Contact } from "./entities/contacts.entity";
+import { initialMigration1676221798889 } from "./migrations/1676221798889-initialMigration";
 
 const AppDataSource = new DataSource(
-    process.env.NODE_ENV === "test" ?
-    {
+  process.env.NODE_ENV === "test"
+    ? {
         type: "sqlite",
         database: ":memory:",
         synchronize: true,
-        entities: ["src/entities/*.ts"]
-    } :
-    {
+        entities: [User, Contact],
+      }
+    : {
         type: "postgres",
         host: process.env.DB_HOST,
         port: 5432,
@@ -18,9 +21,9 @@ const AppDataSource = new DataSource(
         database: process.env.DB,
         logging: true,
         synchronize: false,
-        entities: ['src/entities/*.ts'],
-        migrations: ['src/migrations/*.ts']
-    }
-)
+        entities: [User, Contact],
+        migrations: [initialMigration1676221798889],
+      }
+);
 
-export default AppDataSource
+export default AppDataSource;
