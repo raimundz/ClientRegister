@@ -1,6 +1,6 @@
 export interface IContacts {
   email: string;
   name: string;
-  tel: string;
+  tel: number;
   userId: string;
 }

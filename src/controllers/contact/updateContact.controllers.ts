@@ -1,15 +1,21 @@
 import { Request, Response } from "express";
-import createContactService from "../../services/contatc/createContact.services";
+import updateContactService from "../../services/contatc/updateContactServices";
 
-const createContactController = async (
+const updateContactController = async (
   request: Request,
   response: Response
 ) => {
   const { name, email, tel } = request.body;
-
   const userId = request.body.decodifiedToken.id;
+  const { id } = request.params;
   try {
-    const contact = await createContactService({ name, email, tel, userId });
+    const contact = await updateContactService({
+      name,
+      email,
+      tel,
+      userId,
+      id,
+    });
     return response.status(201).json(contact);
   } catch (error) {
     if (error instanceof Error) {
@@ -20,4 +26,4 @@ const createContactController = async (
   }
 };
 
-export default createContactController;
+export default updateContactController;

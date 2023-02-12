@@ -9,11 +9,20 @@ const createContactService = async ({
   tel,
   userId,
 }: IContacts) => {
-  const contactRepository = AppDataSource.getRepository(Contact);  
+  const contactRepository = AppDataSource.getRepository(Contact);
   const userRepository = AppDataSource.getRepository(User);
-  
+  const user = await userRepository.findOneBy({ id: userId });
 
-  const user = userRepository.findOneBy({id:userId})
+  const contact = new Contact();
+  contact.createdAt = Date();
+  contact.email = email;
+  contact.name = name;
+  contact.tel = tel;
+  contact.user = user!;
+
+  contactRepository.create(contact);
+  await contactRepository.save(contact);
+  return contact;
 };
 
 export default createContactService;
